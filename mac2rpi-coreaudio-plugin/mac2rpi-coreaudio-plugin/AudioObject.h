@@ -51,8 +51,8 @@ public:
    *
    * @param clientProcessID The process ID of the client making the request.
    * @param address Structure containing the property details.
-   * @param qualifierDataSize ???
-   * @param qualifierData ???
+   * @param qualifierDataSize Size of qualifier input data.
+   * @param qualifierData Qualifier input data.
    * @return The number of bytes needed to store the property.
    */
   virtual UInt32 GetPropertyDataSize(pid_t clientProcessID,
@@ -64,8 +64,8 @@ public:
    *
    * @param clientProcessID The process ID of the client making the request.
    * @param address Structure containing the property details.
-   * @param qualifierDataSize ???
-   * @param qualifierData ???
+   * @param qualifierDataSize Size of qualifier input data.
+   * @param qualifierData Qualifier input data.
    * @param dataSize Available storage in \p data.
    * @param data Storage area to store the value of the property.
    * @return The number of bytes needed to store the property.
@@ -81,8 +81,8 @@ public:
    *
    * @param clientProcessID The process ID of the client making the request.
    * @param address Structure containing the property details.
-   * @param qualifierDataSize ???
-   * @param qualifierData ???
+   * @param qualifierDataSize Size of qualifier input data.
+   * @param qualifierData Qualifier input data.
    * @param dataSize Size of value in \p data.
    * @param data The new value of the property.
    * @return A pair consisting of 1) the number of properties changed, and 2)
@@ -136,11 +136,24 @@ UInt32 GetPropertyDataImpl(UInt32 dataSize, T value, void* data) {
   return sizeof(T);
 }
 
+/** Map of objects based on their IDs. */
 class AudioObjectMap {
 public:
   typedef std::shared_ptr<AudioObject> AudioObjectPtr;
 
+  /** Adds an object to the map.
+   *
+   * @param objectID Object identifier.
+   * @param object The object instance to add.
+   */
   static void AddObject(AudioObjectID objectID, AudioObjectPtr object);
+  
+  /** Finds an object based on the given ID.
+   *
+   * @param objectID Object identifier.
+   * @return The object instance associated with the given identifier.
+   * @note An exception is thrown if the object ID is not found.
+   */
   static AudioObject& FindObject(AudioObjectID objectID);
   
 private:
