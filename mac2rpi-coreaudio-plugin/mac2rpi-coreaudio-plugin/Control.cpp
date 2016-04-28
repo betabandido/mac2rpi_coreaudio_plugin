@@ -12,7 +12,7 @@
 
 #pragma mark VolumeControl
 
-VolumeControl::VolumeControl(AudioObjectID objectID, const Device& device)
+VolumeControl::VolumeControl(AudioObjectID objectID, Device& device)
   : AudioObject(objectID,
                 kAudioVolumeControlClassID,
                 kAudioLevelControlClassID,
@@ -170,14 +170,53 @@ VolumeControl::SetPropertyData(pid_t clientProcessID,
                                const void* data) {
   switch (address.mSelector) {
     case kAudioLevelControlPropertyScalarValue:
-      LOG("###### Set scalar value!!!");
-      // TODO
-      break;
+    {
+      CheckInDataSize(dataSize, sizeof(Float32));
+      auto volume = *(static_cast<const Float32*>(data));
+      volume = std::max<Float32>(volume, 0);
+      volume = std::min<Float32>(volume, 1);
+      LOG(boost::format("###### Volume set scalar value (%1%) !!!") % volume);
+      if (volume != device_.OutputVolume()) {
+        device_.SetOutputVolume(volume);
+        ChangedPropertyList changedProperties;
+        changedProperties[0].mSelector = kAudioLevelControlPropertyScalarValue;
+        changedProperties[0].mScope = kAudioObjectPropertyScopeGlobal;
+        changedProperties[0].mElement = kAudioObjectPropertyElementMaster;
+        changedProperties[1].mSelector = kAudioLevelControlPropertyDecibelValue;
+        changedProperties[1].mScope = kAudioObjectPropertyScopeGlobal;
+        changedProperties[1].mElement = kAudioObjectPropertyElementMaster;
+        return std::make_pair(2, changedProperties);
+      }
+      
+      return std::make_pair(0, ChangedPropertyList{});
+    }
       
     case kAudioLevelControlPropertyDecibelValue:
-      LOG("###### Set decibel value!!!");
-      // TODO
-      break;
+    {
+      CheckInDataSize(dataSize, sizeof(Float32));
+      auto volume = *(static_cast<const Float32*>(data));
+      volume = std::max<Float32>(volume, Device::volumeMinDB);
+      volume = std::min<Float32>(volume, Device::volumeMaxDB);
+      LOG(boost::format("###### Volume set decibel value (%1%) !!!") % volume);
+      
+      volume = volume - Device::volumeMinDB;
+      volume = volume / (Device::volumeMaxDB - Device::volumeMinDB);
+      volume = std::sqrt(volume);
+      
+      if (volume != device_.OutputVolume()) {
+        device_.SetOutputVolume(volume);
+        ChangedPropertyList changedProperties;
+        changedProperties[0].mSelector = kAudioLevelControlPropertyScalarValue;
+        changedProperties[0].mScope = kAudioObjectPropertyScopeGlobal;
+        changedProperties[0].mElement = kAudioObjectPropertyElementMaster;
+        changedProperties[1].mSelector = kAudioLevelControlPropertyDecibelValue;
+        changedProperties[1].mScope = kAudioObjectPropertyScopeGlobal;
+        changedProperties[1].mElement = kAudioObjectPropertyElementMaster;
+        return std::make_pair(2, changedProperties);
+      }
+      
+      return std::make_pair(0, ChangedPropertyList{});
+    }
   };
   
   return AudioObject::SetPropertyData(clientProcessID,
@@ -194,7 +233,7 @@ VolumeControl::SetPropertyData(pid_t clientProcessID,
 
 #pragma mark MuteControl
 
-MuteControl::MuteControl(AudioObjectID objectID, const Device& device)
+MuteControl::MuteControl(AudioObjectID objectID, Device& device)
   : AudioObject(objectID,
                 kAudioMuteControlClassID,
                 kAudioBooleanControlClassID,
@@ -294,9 +333,22 @@ MuteControl::SetPropertyData(pid_t clientProcessID,
                              const void* data) {
   switch (address.mSelector) {
     case kAudioBooleanControlPropertyValue:
-      LOG("###### mute control set");
-      // TODO
-      break;
+    {
+      CheckInDataSize(dataSize, sizeof(UInt32));
+      bool mute = *(static_cast<const UInt32*>(data)) != 0;
+      LOG(boost::format("###### Mute set value (%1%) !!!") % mute);
+      
+      if (mute != device_.OutputMute()) {
+        device_.SetOutputMute(mute);
+        ChangedPropertyList changedProperties;
+        changedProperties[0].mSelector = kAudioBooleanControlPropertyValue;
+        changedProperties[0].mScope = kAudioObjectPropertyScopeGlobal;
+        changedProperties[0].mElement = kAudioObjectPropertyElementMaster;
+        return std::make_pair(1, changedProperties);
+      }
+      
+      return std::make_pair(0, ChangedPropertyList{});
+    }
   };
   
   return AudioObject::SetPropertyData(clientProcessID,

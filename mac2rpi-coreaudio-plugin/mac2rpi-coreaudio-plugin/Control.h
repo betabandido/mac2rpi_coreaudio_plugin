@@ -7,7 +7,7 @@ class Device;
 
 class VolumeControl : public AudioObject {
 public:
-  VolumeControl(AudioObjectID objectID, const Device& device);
+  VolumeControl(AudioObjectID objectID, Device& device);
 
   Boolean HasProperty(pid_t clientProcessID,
                       const AudioObjectPropertyAddress& address) const override;
@@ -36,12 +36,12 @@ public:
                   const void* data) override;
   
 private:
-  const Device& device_;
+  Device& device_;
 };
 
 class MuteControl : public AudioObject {
 public:
-  MuteControl(AudioObjectID objectID, const Device& device);
+  MuteControl(AudioObjectID objectID, Device& device);
 
   Boolean HasProperty(pid_t clientProcessID,
                       const AudioObjectPropertyAddress& address) const override;
@@ -70,7 +70,7 @@ public:
                   const void* data) override;
   
 private:
-  const Device& device_;
+  Device& device_;
 };
 
 #endif /* Control_h */
