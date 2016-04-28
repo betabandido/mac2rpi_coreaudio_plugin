@@ -15,6 +15,8 @@ namespace asio = boost::asio;
 using boost::asio::ip::tcp;
 
 constexpr std::array<Float64, 2> Device::availableSampleRates;
+constexpr Float32 Device::volumeMinDB;
+constexpr Float32 Device::volumeMaxDB;
 constexpr unsigned Device::numberOfStreams;
 constexpr unsigned Device::numberOfControls;
 constexpr unsigned Device::numberOfSubObjects;
