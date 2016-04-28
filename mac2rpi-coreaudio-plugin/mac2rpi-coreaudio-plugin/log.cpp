@@ -2,6 +2,8 @@
 
 #include <syslog.h>
 
+#include "types.h"
+
 void log(const std::string& s) noexcept {
   try {
     syslog(LOG_NOTICE, "%s", s.c_str());
@@ -14,12 +16,8 @@ void log(const boost::format& fmt) noexcept {
   } catch (...) {}
 }
 
-// TODO remove
-
-#include "types.h"
-
-std::string ObjectIDToString(AudioObjectID object_id) {
-  switch (object_id) {
+std::string ObjectIDToString(AudioObjectID objectID) {
+  switch (objectID) {
     case kObjectID_PlugIn:
       return "plugin";
     case kObjectID_Device:
@@ -31,144 +29,146 @@ std::string ObjectIDToString(AudioObjectID object_id) {
     case kObjectID_Mute_Output_Master:
       return "mute_output_master";
     case kAudioObjectPropertyBaseClass:
-      return "property_base_class";
+      return "base_class";
     case kAudioObjectPropertyClass:
-      return "property_class";
+      return "class";
     case kAudioObjectPropertyOwner:
-      return "property_owner";
-    case kAudioObjectPropertyManufacturer:
-      return "property_manufacturer";
-    case kAudioObjectPropertyOwnedObjects:
-      return "property_owned_objects";
+      return "owner";
     case kAudioObjectPropertyName:
-      return "property_name";
+      return "name";
     case kAudioObjectPropertyModelName:
-      return "property_model_name";
+      return "model_name";
+    case kAudioObjectPropertyManufacturer:
+      return "manufacturer";
+    case kAudioObjectPropertyOwnedObjects:
+      return "owned_objects";
     case kAudioObjectPropertyIdentify:
-      return "property_identify";
+      return "identify";
     case kAudioObjectPropertySerialNumber:
-      return "property_serial_number";
+      return "serial_number";
     case kAudioObjectPropertyFirmwareVersion:
-      return "property_firmware_version";
+      return "firmware_version";
   }
   
-  return boost::str(boost::format("### unknown (%1%) ###") % object_id);
+  return boost::str(boost::format("### unknown (%1%) ###") % objectID);
 }
 
-std::string PluginPropertyToString(AudioObjectID object_id) {
-  switch (object_id) {
-    case kAudioPlugInPropertyBoxList:
-      return "property_box_list";
-    case kAudioPlugInPropertyTranslateUIDToBox:
-      return "property_translate_uid_to_box";
+std::string PluginPropertyToString(AudioObjectID objectID) {
+  switch (objectID) {
     case kAudioPlugInPropertyDeviceList:
-      return "property_device_list";
+      return "device_list";
     case kAudioPlugInPropertyTranslateUIDToDevice:
-      return "property_translate_uid_to_device";
-//    case kAudioPlugInPropertyResourceBundle:
-//      return "property_resource_bundle";
+      return "translate_uid_to_device";
+    case kAudioPlugInPropertyBoxList:
+      return "box_list";
+    case kAudioPlugInPropertyTranslateUIDToBox:
+      return "translate_uid_to_box";
+    case kAudioPlugInPropertyResourceBundle:
+      return "resource_bundle";
   }
   
-  return ObjectIDToString(object_id);
+  return ObjectIDToString(objectID);
 }
 
-std::string DevicePropertyToString(AudioObjectID object_id) {
-  switch (object_id) {
+std::string DevicePropertyToString(AudioObjectID objectID) {
+  switch (objectID) {
     case kAudioDevicePropertyDeviceUID:
-      return "device_property_device_uid";
+      return "device_device_uid";
     case kAudioDevicePropertyModelUID:
-      return "device_property_model_uid";
+      return "device_model_uid";
     case kAudioDevicePropertyTransportType:
-      return "device_property_transport_type";
+      return "device_transport_type";
     case kAudioDevicePropertyRelatedDevices:
-      return "device_property_related_devices";
+      return "device_related_devices";
     case kAudioDevicePropertyClockDomain:
-      return "device_property_clock_domain";
+      return "device_clock_domain";
     case kAudioDevicePropertyDeviceIsAlive:
-      return "device_property_device_is_alive";
+      return "device_device_is_alive";
     case kAudioDevicePropertyDeviceIsRunning:
-      return "device_property_device_is_running";
-    case kAudioObjectPropertyControlList:
-      return "device_property_control_list";
-    case kAudioDevicePropertyNominalSampleRate:
-      return "device_property_nominal_sample_rates";
-    case kAudioDevicePropertyAvailableNominalSampleRates:
-      return "device_property_available_nominal_sample_rates";
-    case kAudioDevicePropertyIsHidden:
-      return "device_property_is_hidden";
-//    case kAudioDevicePropertyZeroTimeStampPeriod:
-//      return "device_property_zero_time_stamp_period";
-    case kAudioDevicePropertyIcon:
-      return "device_property_icon";
-    case kAudioDevicePropertyStreams:
-      return "device_property_streams";
+      return "device_device_is_running";
     case kAudioDevicePropertyDeviceCanBeDefaultDevice:
-      return "device_property_can_be_default_device";
+      return "device_can_be_default_device";
     case kAudioDevicePropertyDeviceCanBeDefaultSystemDevice:
-      return "device_property_can_be_default_system_device";
+      return "device_can_be_default_system_device";
     case kAudioDevicePropertyLatency:
-      return "device_property_latency";
+      return "device_latency";
+    case kAudioDevicePropertyStreams:
+      return "device_streams";
+    case kAudioObjectPropertyControlList:
+      return "device_control_list";
     case kAudioDevicePropertySafetyOffset:
-      return "device_property_safety_offset";
+      return "device_safety_offset";
+    case kAudioDevicePropertyNominalSampleRate:
+      return "device_nominal_sample_rates";
+    case kAudioDevicePropertyAvailableNominalSampleRates:
+      return "device_available_nominal_sample_rates";
+    case kAudioDevicePropertyIcon:
+      return "device_icon";
+    case kAudioDevicePropertyIsHidden:
+      return "device_is_hidden";
     case kAudioDevicePropertyPreferredChannelsForStereo:
-      return "device_property_preferred_channels_for_stereo";
+      return "device_preferred_channels_for_stereo";
     case kAudioDevicePropertyPreferredChannelLayout:
-      return "device_property_preferred_channel_layout";
+      return "device_preferred_channel_layout";
+    case kAudioDevicePropertyZeroTimeStampPeriod:
+      return "device_zero_time_stamp_period";
   }
   
-  return ObjectIDToString(object_id);
+  return ObjectIDToString(objectID);
 }
 
-std::string StreamPropertyToString(AudioObjectID object_id) {
-  switch (object_id) {
+std::string StreamPropertyToString(AudioObjectID objectID) {
+  switch (objectID) {
     case kAudioStreamPropertyIsActive:
-      return "stream_property_is_active";
+      return "stream_is_active";
     case kAudioStreamPropertyDirection:
-      return "stream_property_direction";
+      return "stream_direction";
     case kAudioStreamPropertyTerminalType:
-      return "stream_property_terminal_type";
+      return "stream_terminal_type";
     case kAudioStreamPropertyStartingChannel:
-      return "stream_property_starting_channel";
+      return "stream_starting_channel";
     case kAudioStreamPropertyLatency:
-      return "stream_property_latency";
+      return "stream_latency";
     case kAudioStreamPropertyVirtualFormat:
-      return "stream_property_virtual_format";
-    case kAudioStreamPropertyPhysicalFormat:
-      return "stream_property_physical_format";
+      return "stream_virtual_format";
     case kAudioStreamPropertyAvailableVirtualFormats:
-      return "stream_property_available_virtual_formats";
+      return "stream_available_virtual_formats";
+    case kAudioStreamPropertyPhysicalFormat:
+      return "stream_physical_format";
     case kAudioStreamPropertyAvailablePhysicalFormats:
-      return "stream_property_available_physical_formats";
+      return "stream_available_physical_formats";
   }
   
-  return ObjectIDToString(object_id);
+  return ObjectIDToString(objectID);
 }
 
-std::string ControlPropertyToString(AudioObjectID object_id) {
-  switch (object_id) {
+std::string ControlPropertyToString(AudioObjectID objectID) {
+  switch (objectID) {
     case kAudioControlPropertyScope:
-      return "control_property_scope";
+      return "control_scope";
     case kAudioControlPropertyElement:
-      return "control_property_element";
+      return "control_element";
     case kAudioLevelControlPropertyScalarValue:
-      return "level_control_property_scalar_value";
+      return "level_control_scalar_value";
     case kAudioLevelControlPropertyDecibelValue:
-      return "level_control_property_decibel_value";
+      return "level_control_decibel_value";
     case kAudioLevelControlPropertyDecibelRange:
-      return "level_control_property_decibel_range";
+      return "level_control_decibel_range";
     case kAudioLevelControlPropertyConvertScalarToDecibels:
-      return "level_control_property_convert_scalar_to_decibels";
+      return "level_control_convert_scalar_to_decibels";
     case kAudioLevelControlPropertyConvertDecibelsToScalar:
-      return "level_control_property_convert_decibels_to_scalar";
+      return "level_control_convert_decibels_to_scalar";
     case kAudioBooleanControlPropertyValue:
-      return "boolean_control_property_value";
+      return "boolean_control_value";
     case kAudioSelectorControlPropertyCurrentItem:
-      return "selector_control_property_current_item";
+      return "selector_control_current_item";
     case kAudioSelectorControlPropertyAvailableItems:
-      return "selector_control_property_available_items";
+      return "selector_control_available_items";
     case kAudioSelectorControlPropertyItemName:
-      return "selector_control_property_item_name";
+      return "selector_control_item_name";
+    case kAudioSelectorControlPropertyItemKind:
+      return "selector_control_item_kind";
   }
   
-  return ObjectIDToString(object_id);
+  return ObjectIDToString(objectID);
 }

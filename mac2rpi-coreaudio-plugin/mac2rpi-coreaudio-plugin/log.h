@@ -4,27 +4,32 @@
 // TODO remove
 #define DEBUG 1
 
-#include <string>
-#include <boost/format.hpp>
-
 #ifdef DEBUG
+  #include <string>
+  #include <boost/format.hpp>
+  #include <CoreAudio/AudioDriverPlugIn.h>
+
+  /** Logs a message in the system log.
+   *
+   * @param s The string containing the message.
+   */
+  void log(const std::string& s) noexcept;
+
+  /** Logs a message in the system log.
+   *
+   * @param fmt The formatting object containing the message.
+   */
+  void log(const boost::format& fmt) noexcept;
+
+  std::string ObjectIDToString(AudioObjectID objectID);
+  std::string PluginPropertyToString(AudioObjectID objectID);
+  std::string DevicePropertyToString(AudioObjectID objectID);
+  std::string StreamPropertyToString(AudioObjectID objectID);
+  std::string ControlPropertyToString(AudioObjectID objectID);
+
   #define LOG(x) log(x)
 #else
   #define LOG(x) do {} while (false)
 #endif
-
-void log(const std::string& s) noexcept;
-
-void log(const boost::format& fmt) noexcept;
-
-// TODO remove
-#include <string>
-#include <CoreAudio/AudioDriverPlugIn.h>
-
-std::string ObjectIDToString(AudioObjectID object_id);
-std::string PluginPropertyToString(AudioObjectID object_id);
-std::string DevicePropertyToString(AudioObjectID object_id);
-std::string StreamPropertyToString(AudioObjectID object_id);
-std::string ControlPropertyToString(AudioObjectID object_id);
 
 #endif /* log_h */
