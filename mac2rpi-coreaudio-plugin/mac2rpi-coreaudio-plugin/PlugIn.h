@@ -16,6 +16,7 @@ class PlugIn : public AudioObject {
   static void CreateInstance();
   
 public:
+  /** Returns the only instance of this class. */
   static PlugIn& GetInstance();
 
   explicit PlugIn(const PreventDirectConstruction&);
@@ -46,11 +47,20 @@ public:
                   UInt32 dataSize,
                   const void* data) override;
   
+  /** Sets the audio server plug-in host reference.
+   *
+   * @param host The host reference.
+   */
   void SetHost(AudioServerPlugInHostRef host) { host_ = host; }
 
 private:
+  /** The plug-in instance. */
   static std::shared_ptr<PlugIn> instance_;
+  
+  /** The device instance. */
   std::shared_ptr<Device> device_;
+  
+  /** The reference to the audio server plug-in host. */
   AudioServerPlugInHostRef host_;
 };
 
