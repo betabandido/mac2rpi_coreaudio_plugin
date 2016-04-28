@@ -1,0 +1,312 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		812C9DED1CD2839000FA23C7 /* AudioObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 812C9DDC1CD2839000FA23C7 /* AudioObject.cpp */; };
+		812C9DEE1CD2839000FA23C7 /* Control.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 812C9DDF1CD2839000FA23C7 /* Control.cpp */; };
+		812C9DEF1CD2839000FA23C7 /* Device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 812C9DE11CD2839000FA23C7 /* Device.cpp */; };
+		812C9DF01CD2839000FA23C7 /* log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 812C9DE31CD2839000FA23C7 /* log.cpp */; };
+		812C9DF21CD2839000FA23C7 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 812C9DE61CD2839000FA23C7 /* main.cpp */; };
+		812C9DF31CD2839000FA23C7 /* PlugIn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 812C9DE81CD2839000FA23C7 /* PlugIn.cpp */; };
+		812C9DF41CD2839000FA23C7 /* Stream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 812C9DEA1CD2839000FA23C7 /* Stream.cpp */; };
+		812C9DF61CD284F700FA23C7 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 812C9DF51CD284F700FA23C7 /* CoreAudio.framework */; };
+		812C9DF81CD2853400FA23C7 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 812C9DF71CD2853400FA23C7 /* CoreFoundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		812C9DD31CD2837300FA23C7 /* mac2rpi-coreaudio-plugin.driver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mac2rpi-coreaudio-plugin.driver"; sourceTree = BUILT_PRODUCTS_DIR; };
+		812C9DD61CD2837300FA23C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		812C9DDC1CD2839000FA23C7 /* AudioObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioObject.cpp; sourceTree = "<group>"; };
+		812C9DDD1CD2839000FA23C7 /* AudioObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioObject.h; sourceTree = "<group>"; };
+		812C9DDE1CD2839000FA23C7 /* C_bindings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C_bindings.h; sourceTree = "<group>"; };
+		812C9DDF1CD2839000FA23C7 /* Control.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Control.cpp; sourceTree = "<group>"; };
+		812C9DE01CD2839000FA23C7 /* Control.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Control.h; sourceTree = "<group>"; };
+		812C9DE11CD2839000FA23C7 /* Device.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Device.cpp; sourceTree = "<group>"; };
+		812C9DE21CD2839000FA23C7 /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
+		812C9DE31CD2839000FA23C7 /* log.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = log.cpp; sourceTree = "<group>"; };
+		812C9DE41CD2839000FA23C7 /* log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = log.h; sourceTree = "<group>"; };
+		812C9DE61CD2839000FA23C7 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		812C9DE71CD2839000FA23C7 /* OSException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSException.h; sourceTree = "<group>"; };
+		812C9DE81CD2839000FA23C7 /* PlugIn.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlugIn.cpp; sourceTree = "<group>"; };
+		812C9DE91CD2839000FA23C7 /* PlugIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlugIn.h; sourceTree = "<group>"; };
+		812C9DEA1CD2839000FA23C7 /* Stream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Stream.cpp; sourceTree = "<group>"; };
+		812C9DEB1CD2839000FA23C7 /* Stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stream.h; sourceTree = "<group>"; };
+		812C9DEC1CD2839000FA23C7 /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
+		812C9DF51CD284F700FA23C7 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		812C9DF71CD2853400FA23C7 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		812C9DD01CD2837300FA23C7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				812C9DF81CD2853400FA23C7 /* CoreFoundation.framework in Frameworks */,
+				812C9DF61CD284F700FA23C7 /* CoreAudio.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		812C9DCA1CD2837300FA23C7 = {
+			isa = PBXGroup;
+			children = (
+				812C9DF71CD2853400FA23C7 /* CoreFoundation.framework */,
+				812C9DF51CD284F700FA23C7 /* CoreAudio.framework */,
+				812C9DD51CD2837300FA23C7 /* mac2rpi-coreaudio-plugin */,
+				812C9DD41CD2837300FA23C7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		812C9DD41CD2837300FA23C7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				812C9DD31CD2837300FA23C7 /* mac2rpi-coreaudio-plugin.driver */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		812C9DD51CD2837300FA23C7 /* mac2rpi-coreaudio-plugin */ = {
+			isa = PBXGroup;
+			children = (
+				812C9DDC1CD2839000FA23C7 /* AudioObject.cpp */,
+				812C9DDD1CD2839000FA23C7 /* AudioObject.h */,
+				812C9DDE1CD2839000FA23C7 /* C_bindings.h */,
+				812C9DDF1CD2839000FA23C7 /* Control.cpp */,
+				812C9DE01CD2839000FA23C7 /* Control.h */,
+				812C9DE11CD2839000FA23C7 /* Device.cpp */,
+				812C9DE21CD2839000FA23C7 /* Device.h */,
+				812C9DD61CD2837300FA23C7 /* Info.plist */,
+				812C9DE31CD2839000FA23C7 /* log.cpp */,
+				812C9DE41CD2839000FA23C7 /* log.h */,
+				812C9DE61CD2839000FA23C7 /* main.cpp */,
+				812C9DE71CD2839000FA23C7 /* OSException.h */,
+				812C9DE81CD2839000FA23C7 /* PlugIn.cpp */,
+				812C9DE91CD2839000FA23C7 /* PlugIn.h */,
+				812C9DEA1CD2839000FA23C7 /* Stream.cpp */,
+				812C9DEB1CD2839000FA23C7 /* Stream.h */,
+				812C9DEC1CD2839000FA23C7 /* types.h */,
+			);
+			path = "mac2rpi-coreaudio-plugin";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		812C9DD21CD2837300FA23C7 /* mac2rpi-coreaudio-plugin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 812C9DD91CD2837300FA23C7 /* Build configuration list for PBXNativeTarget "mac2rpi-coreaudio-plugin" */;
+			buildPhases = (
+				812C9DCF1CD2837300FA23C7 /* Sources */,
+				812C9DD01CD2837300FA23C7 /* Frameworks */,
+				812C9DD11CD2837300FA23C7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "mac2rpi-coreaudio-plugin";
+			productName = "mac2rpi-coreaudio-plugin";
+			productReference = 812C9DD31CD2837300FA23C7 /* mac2rpi-coreaudio-plugin.driver */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		812C9DCB1CD2837300FA23C7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Victor Jimenez";
+				TargetAttributes = {
+					812C9DD21CD2837300FA23C7 = {
+						CreatedOnToolsVersion = 7.3;
+					};
+				};
+			};
+			buildConfigurationList = 812C9DCE1CD2837300FA23C7 /* Build configuration list for PBXProject "mac2rpi-coreaudio-plugin" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 812C9DCA1CD2837300FA23C7;
+			productRefGroup = 812C9DD41CD2837300FA23C7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				812C9DD21CD2837300FA23C7 /* mac2rpi-coreaudio-plugin */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		812C9DD11CD2837300FA23C7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		812C9DCF1CD2837300FA23C7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				812C9DED1CD2839000FA23C7 /* AudioObject.cpp in Sources */,
+				812C9DEF1CD2839000FA23C7 /* Device.cpp in Sources */,
+				812C9DF01CD2839000FA23C7 /* log.cpp in Sources */,
+				812C9DF41CD2839000FA23C7 /* Stream.cpp in Sources */,
+				812C9DF21CD2839000FA23C7 /* main.cpp in Sources */,
+				812C9DF31CD2839000FA23C7 /* PlugIn.cpp in Sources */,
+				812C9DEE1CD2839000FA23C7 /* Control.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		812C9DD71CD2837300FA23C7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer: betabandido@gmail.com (SB66S38TYR)";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /usr/local/Cellar/boost/1.60.0_1/include;
+				INSTALL_PATH = "";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		812C9DD81CD2837300FA23C7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer: betabandido@gmail.com (SB66S38TYR)";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /usr/local/Cellar/boost/1.60.0_1/include;
+				INSTALL_PATH = "";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		812C9DDA1CD2837300FA23C7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "mac2rpi-coreaudio-plugin/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Audio/Plug-Ins/HAL";
+				OTHER_LDFLAGS = /usr/local/Cellar/boost/1.60.0_1/lib/libboost_system.a;
+				PRODUCT_BUNDLE_IDENTIFIER = "mac2rpi.mac2rpi-coreaudio-plugin";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = driver;
+			};
+			name = Debug;
+		};
+		812C9DDB1CD2837300FA23C7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "mac2rpi-coreaudio-plugin/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Audio/Plug-Ins/HAL";
+				OTHER_LDFLAGS = /usr/local/Cellar/boost/1.60.0_1/lib/libboost_system.a;
+				PRODUCT_BUNDLE_IDENTIFIER = "mac2rpi.mac2rpi-coreaudio-plugin";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = driver;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		812C9DCE1CD2837300FA23C7 /* Build configuration list for PBXProject "mac2rpi-coreaudio-plugin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				812C9DD71CD2837300FA23C7 /* Debug */,
+				812C9DD81CD2837300FA23C7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		812C9DD91CD2837300FA23C7 /* Build configuration list for PBXNativeTarget "mac2rpi-coreaudio-plugin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				812C9DDA1CD2837300FA23C7 /* Debug */,
+				812C9DDB1CD2837300FA23C7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 812C9DCB1CD2837300FA23C7 /* Project object */;
+}
