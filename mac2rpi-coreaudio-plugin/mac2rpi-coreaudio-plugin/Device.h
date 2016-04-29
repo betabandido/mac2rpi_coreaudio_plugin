@@ -74,8 +74,15 @@ public:
                         UInt64& hostTime,
                         UInt64& seed);
   
-  /**
-   * TODO add a description.
+  /** Asks the device whether an operation will be performed.
+   *
+   * @param operationID The operation to ask about.
+   * @result A pair containing two boolean values. The first one indicates
+   *         whether or not the device will perform the given operation. The
+   *         second one indicates whether the device will perform the requested
+   *         operation entirely within the main buffer passed to the
+   *         DoIOOperation routine. If this value is false, it indicates that
+   *         the device requires that the secondary buffer be passed.
    */
   std::pair<bool, bool> WillDoIOOperation(UInt32 operationID) const;
   
@@ -164,6 +171,8 @@ private:
   
   boost::asio::io_service ioService_;
   std::unique_ptr<TCPSocket> outputSocket_;
+  
+  bool connectionIsOpen_ { false };
 
   /** Opens a network connection with the playback server. */
   void OpenConnection();

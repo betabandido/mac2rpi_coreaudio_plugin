@@ -386,6 +386,7 @@ static OSStatus	StartIO(AudioServerPlugInDriverRef driver,
     LOG(boost::format("StartIO: %s") % e.what());
     return e.status();
   } catch (...) {
+    LOG(boost::format("StartIO: unspecified error"));
     return kAudioHardwareUnspecifiedError;
   }
 }
@@ -409,6 +410,7 @@ static OSStatus	StopIO(AudioServerPlugInDriverRef driver,
     LOG(boost::format("StopIO: %s") % e.what());
     return e.status();
   } catch (...) {
+    LOG(boost::format("StopIO: unspecified error"));
     return kAudioHardwareUnspecifiedError;
   }
 }

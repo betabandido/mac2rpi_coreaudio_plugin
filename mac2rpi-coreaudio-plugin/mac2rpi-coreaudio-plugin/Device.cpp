@@ -425,12 +425,12 @@ void Device::StartIO() {
                       kAudioHardwareIllegalOperationError);
   
   if (ioIsRunning_ == 0) {
+    OpenConnection();
+
     ioIsRunning_ = 1;
     numberTimeStamps_ = 0;
 //    anchorSampleTime_ = 0;
     anchorHostTime_ = mach_absolute_time();
-    
-    OpenConnection();
   } else {
     ++ioIsRunning_;
   }
@@ -464,9 +464,9 @@ void Device::GetZeroTimeStamp(Float64& sampleTime,
 
 std::pair<bool, bool> Device::WillDoIOOperation(UInt32 operationID) const {
   if (operationID == kAudioServerPlugInIOOperationWriteMix)
-    return {true, true};
+    return {connectionIsOpen_, true};
   
-  return {false, true}; // XXX what does in-place mean?
+  return {false, true};
 }
 
 void Device::BeginIOOperation(UInt32 operationID,
@@ -506,9 +506,12 @@ void Device::OpenConnection() {
   tcp::resolver resolver(ioService_);
   asio::connect(*outputSocket_,
                 resolver.resolve({"192.168.1.40", "19999"}));
+  LOG("Connection opened");
+  connectionIsOpen_ = true;
 }
 
 void Device::CloseConnection() {
   LOG("Closing connection");
   outputSocket_->close();
+  connectionIsOpen_ = false;
 }
