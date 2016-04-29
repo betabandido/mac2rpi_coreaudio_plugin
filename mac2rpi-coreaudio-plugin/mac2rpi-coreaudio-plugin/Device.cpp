@@ -423,13 +423,13 @@ void Device::StartIO() {
   if (ioIsRunning_ == UINT64_MAX)
     throw OSException("too many calls to StartIO",
                       kAudioHardwareIllegalOperationError);
-  
-  if (ioIsRunning_ == 0) {
+
+  if (!connectionIsOpen_)
     OpenConnection();
 
+  if (ioIsRunning_ == 0) {
     ioIsRunning_ = 1;
     numberTimeStamps_ = 0;
-//    anchorSampleTime_ = 0;
     anchorHostTime_ = mach_absolute_time();
   } else {
     ++ioIsRunning_;
@@ -442,6 +442,7 @@ void Device::StopIO() {
                       kAudioHardwareIllegalOperationError);
   
   --ioIsRunning_;
+  
   if (ioIsRunning_ == 0)
     CloseConnection();
 }
@@ -496,18 +497,35 @@ void Device::EndIOOperation(UInt32 operationID,
 void Device::WriteOutputData(UInt32 ioBufferFrameSize,
                              Float64 sampleTime,
                              const void* buffer) {
-  LOG(boost::format("WriteOutputData: ioBufferFrameSize=%1%")
-      % ioBufferFrameSize);
-  asio::write(*outputSocket_, asio::buffer(buffer, ioBufferFrameSize * 8));
+  try {
+    LOG(boost::format("WriteOutputData: ioBufferFrameSize=%1%")
+        % ioBufferFrameSize);
+    asio::write(*outputSocket_,
+                asio::buffer(buffer, ioBufferFrameSize * 8));
+  } catch (const boost::system::system_error& e) {
+    if (e.code() == boost::asio::error::broken_pipe) {
+      LOG("### WriteOutputData: connection was broken");
+      connectionIsOpen_ = false;
+      // TODO shall we just try to reopen the connection?
+    } else {
+      LOG(boost::format("### WriteOutputData: unexpected error (%1%)") % e.what());
+    }
+    throw OSException(e.what());
+  }
 }
 
 void Device::OpenConnection() {
-  LOG("Opening connection");
-  tcp::resolver resolver(ioService_);
-  asio::connect(*outputSocket_,
-                resolver.resolve({"192.168.1.40", "19999"}));
-  LOG("Connection opened");
-  connectionIsOpen_ = true;
+  try {
+    LOG("Opening connection");
+    tcp::resolver resolver(ioService_);
+    asio::connect(*outputSocket_,
+                  resolver.resolve({"192.168.1.40", "19999"}));
+    LOG("Connection opened");
+    connectionIsOpen_ = true;
+  } catch (const boost::system::system_error& e) {
+    LOG(boost::format("Error opening the connection: %1%") % e.what());
+    throw;
+  }
 }
 
 void Device::CloseConnection() {

@@ -377,7 +377,7 @@ static OSStatus	StartIO(AudioServerPlugInDriverRef driver,
       throw OSException("bad driver reference",
                         kAudioHardwareBadObjectError);
     
-    LOG("StartIO");
+    LOG("*** StartIO ***");
   
     auto& device = static_cast<Device&>(AudioObjectMap::FindObject(deviceObjectID));
     device.StartIO();
@@ -401,7 +401,7 @@ static OSStatus	StopIO(AudioServerPlugInDriverRef driver,
       throw OSException("bad driver reference",
                         kAudioHardwareBadObjectError);
     
-    LOG("StopIO");
+    LOG("*** StopIO ***");
     
     auto& device = static_cast<Device&>(AudioObjectMap::FindObject(deviceObjectID));
     device.StopIO();
@@ -458,9 +458,9 @@ static OSStatus	WillDoIOOperation(AudioServerPlugInDriverRef driver,
       throw OSException("no place to put the will-do in-place value",
                         kAudioHardwareIllegalOperationError);
 
-    LOG(boost::format("WillDoIOOperation: deviceObjectID=%1% operationID=%2%")
-        % deviceObjectID
-        % operationID);
+//    LOG(boost::format("WillDoIOOperation: deviceObjectID=%1% operationID=%2%")
+//        % deviceObjectID
+//        % operationID);
 
     auto& device = static_cast<Device&>(AudioObjectMap::FindObject(deviceObjectID));
     std::tie(*willDo, *willDoInPlace) = device.WillDoIOOperation(operationID);
@@ -490,9 +490,9 @@ static OSStatus	BeginIOOperation(AudioServerPlugInDriverRef driver,
       throw OSException("no cycle info",
                         kAudioHardwareIllegalOperationError);
     
-    LOG(boost::format("BeginIOOperation: deviceObjectID=%1% operationID=%2%")
-        % deviceObjectID
-        % operationID);
+//    LOG(boost::format("BeginIOOperation: deviceObjectID=%1% operationID=%2%")
+//        % deviceObjectID
+//        % operationID);
     
     auto& device = static_cast<Device&>(AudioObjectMap::FindObject(deviceObjectID));
     device.BeginIOOperation(operationID,
@@ -564,9 +564,9 @@ static OSStatus	EndIOOperation(AudioServerPlugInDriverRef driver,
       throw OSException("no cycle info",
                         kAudioHardwareIllegalOperationError);
     
-    LOG(boost::format("EndIOOperation: deviceObjectID=%1% operationID=%2%")
-        % deviceObjectID
-        % operationID);
+//    LOG(boost::format("EndIOOperation: deviceObjectID=%1% operationID=%2%")
+//        % deviceObjectID
+//        % operationID);
 
     auto& device = static_cast<Device&>(AudioObjectMap::FindObject(deviceObjectID));
     device.EndIOOperation(operationID,
