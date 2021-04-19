@@ -6,10 +6,6 @@
 #include "log.h"
 #include "OSException.h"
 
-///////////////////
-// VolumeControl //
-///////////////////
-
 #pragma mark VolumeControl
 
 VolumeControl::VolumeControl(AudioObjectID objectID, Device& device)

@@ -12,7 +12,6 @@
 #include "types.h"
 
 namespace asio = boost::asio;
-using boost::asio::ip::tcp;
 
 constexpr std::array<Float64, 2> Device::availableSampleRates;
 constexpr Float32 Device::volumeMinDB;
@@ -34,7 +33,8 @@ Device::Device()
                    (kObjectID_Volume_Output_Master, *this))
   , muteControl_(std::make_shared<MuteControl>
                  (kObjectID_Mute_Output_Master, *this))
-  , outputSocket_(std::make_unique<TCPSocket>(ioService_))
+  , endpoint_(asio::ip::make_address("239.255.0.1"), 30001)
+  , outputSocket_(ioService_, endpoint_.protocol())
 {
   AudioObjectMap::AddObject(kObjectID_Stream_Output, outputStream_);
   AudioObjectMap::AddObject(kObjectID_Volume_Output_Master, volumeControl_);
@@ -424,9 +424,6 @@ void Device::StartIO() {
     throw OSException("too many calls to StartIO",
                       kAudioHardwareIllegalOperationError);
 
-  if (!connectionIsOpen_)
-    OpenConnection();
-
   if (ioIsRunning_ == 0) {
     ioIsRunning_ = 1;
     numberTimeStamps_ = 0;
@@ -442,9 +439,6 @@ void Device::StopIO() {
                       kAudioHardwareIllegalOperationError);
   
   --ioIsRunning_;
-  
-  if (ioIsRunning_ == 0)
-    CloseConnection();
 }
 
 void Device::GetZeroTimeStamp(Float64& sampleTime,
@@ -465,7 +459,7 @@ void Device::GetZeroTimeStamp(Float64& sampleTime,
 
 std::pair<bool, bool> Device::WillDoIOOperation(UInt32 operationID) const {
   if (operationID == kAudioServerPlugInIOOperationWriteMix)
-    return {connectionIsOpen_, true};
+    return {true, true};
   
   return {false, true};
 }
@@ -500,36 +494,13 @@ void Device::WriteOutputData(UInt32 ioBufferFrameSize,
   try {
     LOG(boost::format("WriteOutputData: ioBufferFrameSize=%1%")
         % ioBufferFrameSize);
-    asio::write(*outputSocket_,
-                asio::buffer(buffer, ioBufferFrameSize * 8));
+    outputSocket_.send_to(
+                          asio::buffer(buffer, ioBufferFrameSize * 8),
+                          endpoint_
+                          );
   } catch (const boost::system::system_error& e) {
-    if (e.code() == boost::asio::error::broken_pipe) {
-      LOG("### WriteOutputData: connection was broken");
-      connectionIsOpen_ = false;
-      // TODO shall we just try to reopen the connection?
-    } else {
-      LOG(boost::format("### WriteOutputData: unexpected error (%1%)") % e.what());
-    }
+    // TODO: check this again after moving to multicast
+    LOG(boost::format("### WriteOutputData: unexpected error (%1%)") % e.what());
     throw OSException(e.what());
   }
-}
-
-void Device::OpenConnection() {
-  try {
-    LOG("Opening connection");
-    tcp::resolver resolver(ioService_);
-    asio::connect(*outputSocket_,
-                  resolver.resolve({"192.168.1.40", "19999"}));
-    LOG("Connection opened");
-    connectionIsOpen_ = true;
-  } catch (const boost::system::system_error& e) {
-    LOG(boost::format("Error opening the connection: %1%") % e.what());
-    throw;
-  }
-}
-
-void Device::CloseConnection() {
-  LOG("Closing connection");
-  outputSocket_->close();
-  connectionIsOpen_ = false;
 }
