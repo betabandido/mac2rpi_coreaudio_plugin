@@ -138,8 +138,6 @@ public:
   void SetOutputMute(bool mute) { outputMute_ = mute; }
 
 private:
-  typedef boost::asio::ip::tcp::socket TCPSocket;
-
   /** 1 stream (output stream). */
   static constexpr unsigned numberOfStreams { 1 };
   
@@ -170,15 +168,8 @@ private:
   std::shared_ptr<MuteControl> muteControl_;
   
   boost::asio::io_service ioService_;
-  std::unique_ptr<TCPSocket> outputSocket_;
-  
-  bool connectionIsOpen_ { false };
-
-  /** Opens a network connection with the playback server. */
-  void OpenConnection();
-  
-  /** Closes the network connection with the playback server. */
-  void CloseConnection();
+  boost::asio::ip::udp::endpoint endpoint_;
+  boost::asio::ip::udp::socket outputSocket_;
 };
 
 #endif /* Device_h */

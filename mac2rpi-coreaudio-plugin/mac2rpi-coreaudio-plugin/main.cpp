@@ -132,6 +132,8 @@ static ULONG Release(void* driver) {
 static OSStatus Initialize(AudioServerPlugInDriverRef driver,
                            AudioServerPlugInHostRef host) {
   try {
+    LOG("Initializing mac2rpi");
+    
     if (driver != gDriverInterfaceRef)
       throw OSException("bad driver reference");
 
