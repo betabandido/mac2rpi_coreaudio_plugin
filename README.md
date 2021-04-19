@@ -1,5 +1,5 @@
 # mac2rpi_coreaudio_plugin
-Solution to stream audio from a Mac to a Raspberry Pi. A [playback server](https://github.com/betabandido/mac2rpi_playback_server) running on the RPI listens to the data sent by this plugin and plays it on the audio device.
+Solution to stream audio from a Mac to a Raspberry Pi. This repository contains a [Core Audio](https://developer.apple.com/library/archive/documentation/MusicAudio/Conceptual/CoreAudioOverview/WhatisCoreAudio/WhatisCoreAudio.html) plugin that creates an audio device on the Mac that sends audio to a [playback server](https://github.com/betabandido/mac2rpi_playback_server) running on the Raspberry Pi.
 
 ## Requirements
 
